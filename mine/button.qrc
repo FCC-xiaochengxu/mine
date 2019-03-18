@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>res/0.bmp</file>
+        <file>res/1.bmp</file>
+        <file>res/2.bmp</file>
+        <file>res/3.bmp</file>
+        <file>res/4.bmp</file>
+        <file>res/5.bmp</file>
+        <file>res/6.bmp</file>
+        <file>res/7.bmp</file>
+        <file>res/8.bmp</file>
+        <file>res/ask.bmp</file>
+        <file>res/blank.bmp</file>
+        <file>res/blood.bmp</file>
+        <file>res/error.bmp</file>
+        <file>res/face_normal.bmp</file>
+        <file>res/flag.bmp</file>
+        <file>res/mine.bmp</file>
+        <file>res/1.jpg</file>
+        <file>res/error_info.png</file>
+    </qresource>
+</RCC>
