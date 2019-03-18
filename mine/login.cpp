@@ -12,6 +12,7 @@ login::login(QString IP,int port,QWidget *parent) :
     ui->setupUi(this);
     this->socket=NULL;
     this->doubleclick=false;
+    this->setAttribute(Qt::WA_DeleteOnClose);
 }
 login::~login()
 {

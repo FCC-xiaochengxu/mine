@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "button.h"
+#include<QByteArray>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -33,12 +34,10 @@ int Widget::initButton(int level){
         high=9*size+30;
         this->setMinimumSize(width,high);
         this->setMaximumSize(width,high);
-        Button *b[9][9];
-        this->B=b;
         for(int row=0;row<9;row++){//列
             for(int col=0;col<9;col++){//行
-                b[row][col]=new Button(15+col*size,15+row*size,this);
-                connect(b[row][col],SIGNAL(sendmsg(int,int)),this,SIGNAL(sendata(int,int)));
+                 this->B[row][col]=new Button(15+col*size,15+row*size,this);
+                connect(B[row][col],SIGNAL(sendmsg(int,int)),this,SIGNAL(sendata(int,int)));
             }
         }
     }else{
@@ -47,12 +46,10 @@ int Widget::initButton(int level){
             high=16*size+30;
             this->setMinimumSize(width,high);
             this->setMaximumSize(width,high);
-            Button *b[16][16];
-            this->B=&b;
             for(int row=0;row<16;row++){//列
                 for(int col=0;col<16;col++){//行
-                    b[row][col]=new Button(15+col*size,15+row*size,this);
-                    connect(b[row][col],SIGNAL(sendmsg(int,int)),this,SIGNAL(sendata(int,int)));
+                    this->B[row][col]=new Button(15+col*size,15+row*size,this);
+                    connect(B[row][col],SIGNAL(sendmsg(int,int)),this,SIGNAL(sendata(int,int)));
                 }
             }
         }else{
@@ -61,12 +58,10 @@ int Widget::initButton(int level){
                 high=16*size+30;
                 this->setMinimumSize(width,high);
                 this->setMaximumSize(width,high);
-                Button *b[16][16];
-                this->B=&b;
                 for(int row=0;row<16;row++){//列
                     for(int col=0;col<16;col++){//行
-                        b[row][col]=new Button(15+col*size,15+row*size,this);
-                        connect(b[row][col],SIGNAL(sendmsg(int,int)),this,SIGNAL(sendata(int,int)));
+                       this->B[row][col]=new Button(15+col*size,15+row*size,this);
+                        connect(B[row][col],SIGNAL(sendmsg(int,int)),this,SIGNAL(sendata(int,int)));
                     }
                 }
             }
@@ -80,5 +75,23 @@ void Widget::sendata(int row,int col){
     connect(socket, SIGNAL(readyRead()), this, SLOT(recvdata()));
 }
 void Widget::recvdata(){
-
+    QByteArray buffer;
+    buffer = socket->readAll();
+    QString buf=buffer;
+    QStringList list = buf.split(";");
+    QStringList btnlist;
+    int len=list.length();
+    QString str="";
+    int row;
+    int col;
+    for(int i=0;i<len;i++){
+        str=list[i];
+        btnlist=str.split(",");
+        str=btnlist[0];
+        row=str.toInt();
+        str=btnlist[1];
+        col=str.toInt();
+        str=btnlist[3];
+        B[row][col]->changeimg(str);
+    }
 }

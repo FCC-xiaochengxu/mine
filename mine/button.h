@@ -7,7 +7,6 @@ class Button : public QPushButton
     Q_OBJECT
 protected:
     void mousePressEvent(QMouseEvent *event);
-    void changeimg(QString filepath);
 signals:
     void sendmsg(int,int);
 private:
@@ -19,7 +18,7 @@ private:
     int col;
 public:
     explicit Button(int x,int y,QWidget *parent=0);
-    void change(QString img);
+    void changeimg(QString filepath);
 };
 
 #endif // BUTTON_H

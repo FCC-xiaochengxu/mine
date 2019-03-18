@@ -14,6 +14,7 @@ class Widget : public QWidget
     Q_OBJECT
 private slots:
     void sendata(int row,int col);
+    void recvdata();
 signals:
     void change(int);
 private:
@@ -21,7 +22,7 @@ private:
     QTcpSocket *socket;
     QString IP;
     int port;
-    void *B;
+    Button ***B;
 public:
     explicit Widget(QWidget *parent = 0);
     explicit Widget(QTcpSocket *socket,QString IP,int level,int port,QWidget *parent = 0);
